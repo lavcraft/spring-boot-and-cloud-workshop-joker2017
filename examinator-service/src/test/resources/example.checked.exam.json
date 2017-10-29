@@ -1,0 +1,34 @@
+{
+  "mark": 10,
+  "title": "Экзамен на JokerConf",
+  "sections": [
+    {
+      "title": "Java",
+      "description": "простые вопросы по java",
+      "exercises": [
+        {
+          "question": "разница между spring string и swing",
+          "answer": "без spring`а не обойтись"
+        },
+        {
+          "question": "разница между final finally finalize",
+          "answer": "за finalize отрывают руки"
+        }
+      ]
+    },
+    {
+      "title": "философия",
+      "description": "сложные вопросы по философии",
+      "exercises": [
+        {
+          "question": "В чем смысл жизни",
+          "answer": "42"
+        },
+        {
+          "question": "Что раньше, яйцо или курица",
+          "answer": "петух"
+        }
+      ]
+    }
+  ]
+}
