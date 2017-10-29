@@ -47,6 +47,7 @@ subprojects {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
   }
