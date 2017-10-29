@@ -1,0 +1,5 @@
+server:
+  port: 8081
+exercises:
+  urls:
+    "theology": "http://localhost:8080/"
