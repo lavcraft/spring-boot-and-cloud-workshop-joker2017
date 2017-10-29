@@ -18,3 +18,9 @@ Create Theology Service
 * Add controller for obtain random count of exercise
 * see src/test/resources/example.solved.exam.json exercise block
 * all tests should be passed
+
+## Step 2
+
+* Create controller for collect data from other services
+* Discover service instance
+* run and test
