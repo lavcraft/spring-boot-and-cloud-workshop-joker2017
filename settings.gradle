@@ -1,0 +1,4 @@
+rootProject.name = 'spring-ripper-boot-and-cloud'
+
+include 'examinator-service'
+
