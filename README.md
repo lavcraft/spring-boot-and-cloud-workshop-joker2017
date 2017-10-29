@@ -17,3 +17,4 @@ Create Theology Service
 * Use `JpaRepositry` for connect to database. H2 for example
 * Add controller for obtain random count of exercise
 * see src/test/resources/example.solved.exam.json exercise block
+* all tests should be passed
