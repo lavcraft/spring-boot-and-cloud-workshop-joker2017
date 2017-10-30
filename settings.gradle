@@ -4,4 +4,5 @@ include 'examinator-service'
 include 'theology-service'
 include 'common'
 include 'math-service'
+include 'eureka-server'
 
