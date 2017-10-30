@@ -1,5 +1,8 @@
 server:
   port: 8081
+
 exercises:
   urls:
     "theology": "http://localhost:8080/"
+    "math":     "http://localhost:8082/"
+    "examinator":"http://localhost:8081/"
