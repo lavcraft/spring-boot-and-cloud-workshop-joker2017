@@ -47,6 +47,7 @@ subprojects { p ->
       compile 'com.fasterxml.jackson.module:jackson-module-parameter-names'
       compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
       compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+      compile 'org.springframework.cloud:spring-cloud-config-client'
 
       testCompile 'org.springframework.boot:spring-boot-starter-test'
       compileOnly 'org.springframework.boot:spring-boot-configuration-processor'

@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: math-service
+  cloud:
+    config:
+      discovery:
+        service-id: config-server
+
 eureka:
   client:
     service-url:

@@ -4,5 +4,13 @@ spring:
       server:
         git:
           uri: file:${HOME}/git/trainings/spring-boot-ripper-training/configs
+  application:
+    name: config-server
+
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: ${EUREKA_SERV:http://127.0.0.1:8761/eureka/}
+
 server:
   port: 8888
