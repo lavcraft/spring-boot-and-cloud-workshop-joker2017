@@ -1,9 +1,11 @@
 package ru.spring.ripper.examinator.controller;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import ru.spring.ripper.examinator.ExternalServiceProperties;
 import ru.spring.ripper.examinator.domain.Examine;
@@ -27,9 +29,10 @@ public class ExaminatorComposerController {
 
   public ExaminatorComposerController(
       RestTemplateBuilder restTemplate,
+      LoadBalancerInterceptor loadBalancerInterceptor,
       ExternalServiceProperties externalServiceProperties
   ) {
-    this.restTemplate = restTemplate.build();
+    this.restTemplate = restTemplate.interceptors(loadBalancerInterceptor).build();
     this.externalServiceProperties = externalServiceProperties;
   }
 
@@ -43,12 +46,18 @@ public class ExaminatorComposerController {
 
           String url = discoverExerciseEndpoint(serviceName, exerciseCount);
 
-          return Section.builder()
-              .title(serviceName)
-              .exercises(
-                  asList(restTemplate.getForObject(url, Exercise[].class)))
-              .build();
-
+          try {
+            return Section.builder()
+                .title(serviceName)
+                .exercises(
+                    asList(restTemplate.getForObject(url, Exercise[].class)))
+                .build();
+          } catch (RestClientException e) {
+            System.out.println("e.getLocalizedMessage() = " + e.getLocalizedMessage());
+            return Section.builder()
+                .title(serviceName + " with error " + e.getLocalizedMessage())
+                .build();
+          }
         }).collect(toList());
 
     return Examine.builder()
@@ -58,9 +67,8 @@ public class ExaminatorComposerController {
   }
 
   private String discoverExerciseEndpoint(String serviceName, Integer exerciseCount) {
-    String serviceEndpoint = externalServiceProperties.getUrls().get(serviceName);
 
-    return serviceEndpoint + "/exercise/random?count=" + exerciseCount;
+    return "http://" + serviceName + "-service/exercise/random?count=" + exerciseCount;
   }
 
 }
