@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import ru.spring.ripper.examinator.domain.Exercise;
 import ru.spring.ripper.theology.repository.ExerciseRepository;
 
@@ -14,6 +15,7 @@ import javax.annotation.PostConstruct;
  * @author tolkv
  * @version 29/10/2017
  */
+@EnableDiscoveryClient
 @SpringBootApplication
 @EntityScan(basePackageClasses = Exercise.class)
 @EnableConfigurationProperties(TheologyApplicationProperties.class)

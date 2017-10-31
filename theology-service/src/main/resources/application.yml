@@ -3,3 +3,12 @@ theology:
     "не грешно ли лезть в атом?": "nope"
     "аннотации это грех?": "только если тебя зовут Егор"
     "Самый главный грех?": "Copy Paste"
+
+spring:
+  application:
+    name: theology-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERV:http://127.0.0.1:8761/eureka/}

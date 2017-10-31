@@ -1,3 +1,4 @@
 dependencies {
   compile 'javax.persistence:javax.persistence-api:2.2'
+  compile 'com.fasterxml.jackson.core:jackson-annotations'
 }

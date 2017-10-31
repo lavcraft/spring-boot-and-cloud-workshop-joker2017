@@ -29,7 +29,7 @@ allprojects {
   }
 }
 
-subprojects {
+subprojects { p ->
   apply plugin: 'java'
   apply plugin: 'org.springframework.boot'
 
@@ -41,15 +41,19 @@ subprojects {
   }
 
   dependencies {
-    compile 'org.springframework.cloud:spring-cloud-starter-eureka'
-    compile 'com.fasterxml.jackson.module:jackson-module-parameter-names'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    if (p.name.endsWith('-service')) {
+      compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+      compile 'org.springframework.boot:spring-boot-starter-actuator'
+      compile 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+      compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+      compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+      testCompile 'org.springframework.boot:spring-boot-starter-test'
+      compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    }
+
 
     compileOnly 'org.projectlombok:lombok'
-    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
   }
 
   task dockerBuild {

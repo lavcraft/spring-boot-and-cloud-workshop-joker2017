@@ -4,5 +4,18 @@ server:
 exercises:
   urls:
     "theology": "http://localhost:8080/"
-    "math":     "http://localhost:8082/"
-    "examinator":"http://localhost:8081/"
+    "math": "http://localhost:8082/"
+    "examinator": "http://localhost:8081/"
+
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: ${EUREKA_SERV:http://127.0.0.1:8761/eureka/}
+
+spring:
+  application:
+    name: examinator-service
+
+management:
+  security:
+    enabled: false
