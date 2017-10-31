@@ -5,4 +5,5 @@ include 'theology-service'
 include 'common'
 include 'math-service'
 include 'eureka-server'
+include 'config-server'
 
