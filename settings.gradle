@@ -6,4 +6,5 @@ include 'common'
 include 'math-service'
 include 'eureka-server'
 include 'config-server'
+include 'gateway-server'
 
