@@ -28,11 +28,10 @@ public class ExaminatorComposerController {
   private ExternalServiceProperties externalServiceProperties;
 
   public ExaminatorComposerController(
-      RestTemplateBuilder restTemplate,
-      LoadBalancerInterceptor loadBalancerInterceptor,
+      RestTemplate restTemplate,
       ExternalServiceProperties externalServiceProperties
   ) {
-    this.restTemplate = restTemplate.interceptors(loadBalancerInterceptor).build();
+    this.restTemplate = restTemplate;
     this.externalServiceProperties = externalServiceProperties;
   }
 

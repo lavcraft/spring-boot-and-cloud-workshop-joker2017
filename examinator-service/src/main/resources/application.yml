@@ -19,3 +19,5 @@ spring:
 management:
   security:
     enabled: false
+
+foo.bar: default
