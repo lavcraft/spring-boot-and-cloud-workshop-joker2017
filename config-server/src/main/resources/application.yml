@@ -3,7 +3,10 @@ spring:
     config:
       server:
         git:
-          uri: file:${HOME}/git/trainings/spring-boot-ripper-training/configs
+          uri: https://github.com/lavcraft/spring-boot-and-cloud-workshop-joker2017-configs.git
+          repos:
+            "*/remote": https://github.com/lavcraft/spring-boot-and-cloud-workshop-joker2017-configs.git
+            "*/local": file:${HOME}/git/trainings/spring-boot-ripper-training/configs
   application:
     name: config-server
 
