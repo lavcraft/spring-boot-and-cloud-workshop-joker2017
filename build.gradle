@@ -31,7 +31,9 @@ allprojects {
 
 subprojects { p ->
   apply plugin: 'java'
-  apply plugin: 'org.springframework.boot'
+  if(p.name.endsWith('-service')) {
+    apply plugin: 'org.springframework.boot'
+  }
 
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
@@ -66,9 +68,5 @@ subprojects { p ->
   }
 
   dockerBuild.dependsOn build
-
-  springBoot {
-    executable = true
-  }
 }
 
