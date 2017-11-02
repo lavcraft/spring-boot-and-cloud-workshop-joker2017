@@ -54,6 +54,15 @@ subprojects { p ->
       testCompile 'org.springframework.boot:spring-boot-starter-test'
       compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
       compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
+      compile 'org.springframework.cloud:spring-cloud-starter-hystrix'
+
+      compile 'org.springframework.cloud:spring-cloud-netflix-hystrix-stream'
+      compile 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+
+      compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+      compile 'org.springframework.cloud:spring-cloud-starter-zipkin'
+      compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
     }
 
 
