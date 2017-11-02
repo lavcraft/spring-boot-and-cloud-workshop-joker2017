@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "GET http://localhost:9000/examinator-service/examine/collect" | vegeta attack -rate=60 -duration=20s | vegeta report -reporter=text
+

@@ -9,3 +9,10 @@ spring:
 
 server:
   port: 9000
+
+turbine:
+  stream:
+    port: 8989
+#  aggregator:
+#    clusterConfig: joker
+#  appConfig: examinator-service,math-service,gateway-server,theology-service

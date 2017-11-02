@@ -1,73 +1,39 @@
 package ru.spring.ripper.examinator.controller;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import ru.spring.ripper.examinator.ExternalServiceProperties;
+import ru.spring.ripper.examinator.ExamineService;
 import ru.spring.ripper.examinator.domain.Examine;
-import ru.spring.ripper.examinator.domain.Exercise;
-import ru.spring.ripper.examinator.domain.Section;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author tolkv
  * @version 30/10/2017
  */
 @RestController
+@RequiredArgsConstructor
 public class ExaminatorComposerController {
-  private final RestTemplate restTemplate;
-  private ExternalServiceProperties externalServiceProperties;
+  private final ExamineService examineService;
 
-  public ExaminatorComposerController(
-      RestTemplate restTemplate,
-      ExternalServiceProperties externalServiceProperties
-  ) {
-    this.restTemplate = restTemplate;
-    this.externalServiceProperties = externalServiceProperties;
+  @GetMapping("/examine/collect")
+  public Examine collectExam() {
+    Map<String, Integer> sections = new HashMap<>();
+
+    sections.put("math", 1);
+    sections.put("theology", 1);
+    return examineService.collectExam(sections);
   }
 
   @PostMapping("/examine/collect")
   public Examine collectExam(@RequestBody Map<String, Integer> examSpecification) {
 
-    List<Section> sections = examSpecification.entrySet().stream()
-        .map(stringIntegerEntry -> {
-          String serviceName = stringIntegerEntry.getKey();
-          Integer exerciseCount = stringIntegerEntry.getValue();
+    return examineService.collectExam(examSpecification);
 
-          String url = discoverExerciseEndpoint(serviceName, exerciseCount);
-
-          try {
-            return Section.builder()
-                .title(serviceName)
-                .exercises(
-                    asList(restTemplate.getForObject(url, Exercise[].class)))
-                .build();
-          } catch (RestClientException e) {
-            System.out.println("e.getLocalizedMessage() = " + e.getLocalizedMessage());
-            return Section.builder()
-                .title(serviceName + " with error " + e.getLocalizedMessage())
-                .build();
-          }
-        }).collect(toList());
-
-    return Examine.builder()
-        .title("My favorite exam")
-        .sections(sections)
-        .build();
-  }
-
-  private String discoverExerciseEndpoint(String serviceName, Integer exerciseCount) {
-
-    return "http://" + serviceName + "-service/exercise/random?count=" + exerciseCount;
   }
 
 }
