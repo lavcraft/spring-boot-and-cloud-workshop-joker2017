@@ -7,4 +7,5 @@ include 'math-service'
 include 'eureka-server'
 include 'config-server'
 include 'gateway-server'
+include 'zipkin-server'
 
